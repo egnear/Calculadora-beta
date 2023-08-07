@@ -84,7 +84,7 @@
                     var posicao22ate30 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao18e19 + "" + posicao22ate30;
-                    var resultado = "Reference ID:" + referenceID + "<br> Boleto: Caixa <br> pesquise nesse link: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
+                    var resultado = "Reference ID:" + referenceID + "<br> Boleto: Caixa <br><br><br> Para identificar o reference ID acesse o site: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
 
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("237")) {
@@ -93,7 +93,7 @@
                     var posicao22e23 = codigoBoleto.slice(21, 23);
 
                     var referenceID = posicao12ate20 + posicao22e23;
-                    var resultado ="Reference ID:" + referenceID + "<br> Boleto: Bradesco  <br> pesquise nesse link: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
+                    var resultado ="Reference ID:" + referenceID + "<br> Boleto: Bradesco <br><br> Para identificar o reference ID acesse o site: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
 
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("422")) {
@@ -101,7 +101,7 @@
                     var posicao23ate31 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao23ate31;
-                    var resultado ="Reference ID: "+ referenceID + "<br> Boleto: Safra  <br>  <br> Atente-se! <br>  Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: <br> 'Referencia NSU <br> pesquise nesse link: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id ";
+                    var resultado ="Reference ID: "+ referenceID + "<br> Boleto: Safra  <br>  <br> Atente-se! <br>  Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: <br> 'Referencia NSU <br> <br><br> Para identificar o reference ID acesse o site: https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id ";
 
                     document.getElementById("result").innerHTML = resultado;
                 } else {
