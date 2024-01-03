@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Digite aqui o codigo do boleto bancario</title>
+    
+<title>Digite aqui o codigo do boleto bancario</title>
     <style>
+       
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            position: relative; /* Adicionamos essa propriedade para garantir que o rodapé fique na parte inferior da página */
+            min-height: 100vh; /* Adicionamos essa propriedade para garantir que o rodapé fique na parte inferior da página */
         }
 
         .container {
@@ -49,21 +54,71 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        /* Estilo para a caixa de texto na parte inferior esquerda */
+        #caixa_texto {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #fff;
+            padding: 10px;
+            font-size: 14px;
+            color: #000;
+        }
+
+        /* Estilo para o rodapé */
+        footer {
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+            font-size: 12px;
+            color: #333;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Obtenha aqui o reference ID </h1>
+    
+   
+<div class="container">
+        
+       
+<h1>Obtenha o reference ID </h1>
 
-        <label for="codigo_boleto">Os valores numéricos devem ser inseridos abaixo </label>
-        <input type="text" id="codigo_boleto" placeholder="Digite o código do boleto">
+        
 
-        <button onclick="identificarSepararReferenceID()">Pesquisar</button>
+       
 
-        <div id="result"></div>
+
+<label for="codigo_boleto">Os valores numéricos devem ser inseridos abaixo </label>
+        
+       
+<input type="text" id="codigo_boleto" placeholder="Digite o código do boleto">
+
+        
+
+     
+
+
+       
+
+
+<button onclick="identificarSepararReferenceID()">Pesquisar</button>
+
+        
+
+<div id="result"></div>
     </div>
 
-    <script>
+    <footer>
+        <div id="caixa_texto">
+           
+</div>
+       <br> Colaboradores de criação: Lucas Giovanni Catardo e Flavio Raimundo Junior<br><br> Colaboradores de teste: Mariana Rodrigues Prado Araujo e Juliana Cristina Alves de Lima<br><br> Sugestões ou feedbacks, mande para: Heitor De Souza Igino Beserra, Flavio Raimundo Junior ou Lucas Giovanni Catardo.
+    
+<script>
         function identificarSepararReferenceID() {
             var codigoBoleto = document.getElementById("codigo_boleto").value;
 
@@ -84,7 +139,7 @@
                     var posicao22ate30 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao18e19 + "" + posicao22ate30;
-                    var resultado = "Reference ID:" + referenceID + "<br> Boleto: Caixa";
+                    var resultado = "Reference ID:" + referenceID + "<br> Boleto: Caixa  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id <br><br> Caso não o encontre pelo reference, tente pelo código do boleto, altere o filtro para: (digitable line ou Linha digitavel) poderá acessar o link diretamente: <br> <br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=digitable_line_id <br>";
 
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("237")) {
@@ -93,7 +148,7 @@
                     var posicao22e23 = codigoBoleto.slice(21, 23);
 
                     var referenceID = posicao12ate20 + posicao22e23;
-                    var resultado ="Reference ID:" + referenceID + "<br> Boleto: Bradesco";
+                    var resultado ="Reference ID:" + referenceID + "<br> Boleto: Bradesco  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
 
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("422")) {
@@ -101,8 +156,7 @@
                     var posicao23ate31 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao23ate31;
-                    var resultado ="Reference ID: "+ referenceID + "<br> Boleto: Safra  <br>  <br> Atente-se! <br>  Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: <br> 'Referencia NSU";
-
+                    var resultado ="Reference ID: "+ referenceID + "<br> Boleto: Safra  <br>  <br> Atente-se! <br>  Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: <br> 'Referencia NSU  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id <br><br> Caso não o encontre pelo reference, tente pelo código do boleto, altere o filtro para: (digitable line ou Linha digitavel) poderá acessar o link diretamente: <br> <br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=digitable_line_id <br>";
                     document.getElementById("result").innerHTML = resultado;
                 } else {
                     document.getElementById("result").innerHTML = "Banco não identificado.";
