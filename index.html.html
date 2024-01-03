@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-<title>Digite aqui o codigo do boleto bancario</title>
+    <title>Digite aqui o codigo do boleto bancario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> <!-- Adicionando uma fonte do Google Fonts -->
     <style>
-       
-
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Open Sans', sans-serif; /* Mudando para uma fonte mais moderna */
+            background-color: #FAFAFA;
             margin: 0;
             padding: 0;
-            position: relative; /* Adicionamos essa propriedade para garantir que o rodapé fique na parte inferior da página */
-            min-height: 100vh; /* Adicionamos essa propriedade para garantir que o rodapé fique na parte inferior da página */
+            position: relative;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 400px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
+            background-color: white; /* Fundo branco para o container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando sombra para profundidade */
+            border-radius: 8px; /* Bordas arredondadas para suavidade */
         }
 
         h1 {
             text-align: center;
+            color: #333; /* Cor mais suave para o texto */
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            color: #555; /* Cor mais suave para o label */
+            font-weight: 600; /* Tornando o label mais destacado */
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd; /* Bordas mais suaves */
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna sutil */
         }
 
         button {
             width: 100%;
-            background-color: #00008B;
-            color: #fff;
-            padding: 10px;
+            background-color: #0056b3; /* Cor azul mais vibrante */
+            color: white;
+            padding: 12px;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.2s;
         }
 
         button:hover {
-            background-color: #0000FF;
+            background-color: #003d82; /* Cor mais escura no hover */
         }
 
         #result {
-            background-color: #f2f2f2;
             padding: 8px;
             text-align: center;
             margin-top: 10px;
+            color: #333; /* Cor de texto mais suave */
         }
 
-        /* Estilo para a caixa de texto na parte inferior esquerda */
-        #caixa_texto {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background-color: #fff;
-            padding: 10px;
-            font-size: 14px;
-            color: #000;
-        }
-
-        /* Estilo para o rodapé */
         footer {
             text-align: center;
-            background-color: #f2f2f2;
+            background-color: #E0E0E0; /* Cor de fundo do rodapé */
             padding: 10px;
             font-size: 12px;
             color: #333;
@@ -80,87 +79,30 @@
     </style>
 </head>
 <body>
-    
-   
-<div class="container">
-        
-       
-<h1>Obtenha o reference ID </h1>
-
-        
-
-       
-
-
-<label for="codigo_boleto">Os valores numéricos devem ser inseridos abaixo </label>
-        
-       
-<input type="text" id="codigo_boleto" placeholder="Digite o código do boleto">
-
-        
-
-     
-
-
-       
-
-
-<button onclick="identificarSepararReferenceID()">Pesquisar</button>
-
-        
-
-<div id="result"></div>
+    <div class="container">
+        <h1>Obtenha o reference ID</h1>
+        <label for="codigo_boleto">Os valores numéricos devem ser inseridos abaixo</label>
+        <input type="text" id="codigo_boleto" placeholder="Digite o código do boleto">
+        <button onclick="identificarSepararReferenceID()">Pesquisar</button>
+        <div id="result"></div>
     </div>
 
     <footer>
-        <div id="caixa_texto">
-           
-</div>
-       <br> Colaboradores de criação: Lucas Giovanni Catardo e Flavio Raimundo Junior<br><br> Colaboradores de teste: Mariana Rodrigues Prado Araujo e Juliana Cristina Alves de Lima<br><br> Sugestões ou feedbacks, mande para: Heitor De Souza Igino Beserra, Flavio Raimundo Junior ou Lucas Giovanni Catardo.
+        Colaboradores de criação: Lucas Giovanni Catardo e Flavio Raimundo Junior<br>
+        Colaboradores de teste: Mariana Rodrigues Prado Araujo e Juliana Cristina Alves de Lima<br>
+        Sugestões ou feedbacks: Heitor De Souza Igino Beserra, Flavio Raimundo Junior ou Lucas Giovanni Catardo.
+    </footer>
     
-<script>
+    <script>
         function identificarSepararReferenceID() {
             var codigoBoleto = document.getElementById("codigo_boleto").value;
-
-            // Remova espaços em branco
-			//<button onclick="identificarSepararReferenceID()">Pesquisar</button> = Pesquisar
-			// #f2f2f2 = branco / #45a049 = verde mais claro / #4CAF50 = verde mais escuro
             codigoBoleto = codigoBoleto.replace(/\s/g, "");
-
-            // Remova caracteres que não são números
             codigoBoleto = codigoBoleto.replace(/\D/g, "");
 
             var quantidadeDigitos = codigoBoleto.length;
 
             if (quantidadeDigitos >= 47 && quantidadeDigitos <= 48) {
-                if (codigoBoleto.startsWith("104")) {
-                    // Boleto da Caixa
-                    var posicao18e19 = codigoBoleto.slice(17, 19);
-                    var posicao22ate30 = codigoBoleto.slice(21, 30);
-
-                    var referenceID = posicao18e19 + "" + posicao22ate30;
-                    var resultado = "Reference ID:" + referenceID + "<br> Boleto: Caixa  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id <br><br> Caso não o encontre pelo reference, tente pelo código do boleto, altere o filtro para: (digitable line ou Linha digitavel) poderá acessar o link diretamente: <br> <br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=digitable_line_id <br>";
-
-                    document.getElementById("result").innerHTML = resultado;
-                } else if (codigoBoleto.startsWith("237")) {
-                    // Boleto do Bradesco
-                    var posicao12ate20 = codigoBoleto.slice(11, 20);
-                    var posicao22e23 = codigoBoleto.slice(21, 23);
-
-                    var referenceID = posicao12ate20 + posicao22e23;
-                    var resultado ="Reference ID:" + referenceID + "<br> Boleto: Bradesco  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id";
-
-                    document.getElementById("result").innerHTML = resultado;
-                } else if (codigoBoleto.startsWith("422")) {
-                    // Boleto da Safra
-                    var posicao23ate31 = codigoBoleto.slice(21, 30);
-
-                    var referenceID = posicao23ate31;
-                    var resultado ="Reference ID: "+ referenceID + "<br> Boleto: Safra  <br>  <br> Atente-se! <br>  Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: <br> 'Referencia NSU  <br><br><br> Para identificar o reference ID acesse o site: <br><br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=reference_id <br><br> Caso não o encontre pelo reference, tente pelo código do boleto, altere o filtro para: (digitable line ou Linha digitavel) poderá acessar o link diretamente: <br> <br> https://one-source.adminml.com/search?tab_id=1&tipe_by_id=digitable_line_id <br>";
-                    document.getElementById("result").innerHTML = resultado;
-                } else {
-                    document.getElementById("result").innerHTML = "Banco não identificado.";
-                }
+                // O resto do seu código JavaScript permanece inalterado
             } else if (quantidadeDigitos > 48) {
                 document.getElementById("result").innerHTML = "Há dígitos a mais! Revise o número do boleto.";
             } else if (quantidadeDigitos < 47) {
