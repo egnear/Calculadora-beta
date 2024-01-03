@@ -112,8 +112,7 @@
                     var posicao22ate30 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao18e19 + "" + posicao22ate30;
-                    var resultado = referenceID + " Referencia NSU (Caixa) <br> <img src='caminho/para/imagem_caixa.jpg' alt='Imagem Caixa'>";
-
+                    var resultado = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("237")) {
                     // Boleto do Bradesco
@@ -121,15 +120,14 @@
                     var posicao22e23 = codigoBoleto.slice(21, 23);
 
                     var referenceID = posicao12ate20 + posicao22e23;
-                    var resultado = referenceID + " Referencia NSU (Bradesco) <br> <img src='caminho/para/imagem_bradesco.jpg' alt='Imagem Bradesco'>";
-
+                    var resultado =  "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
                     document.getElementById("result").innerHTML = resultado;
                 } else if (codigoBoleto.startsWith("422")) {
                     // Boleto da Safra
                     var posicao23ate31 = codigoBoleto.slice(21, 30);
 
                     var referenceID = posicao23ate31;
-                    var resultado = referenceID + " Referencia NSU (Safra) <br> Atente-se! Por ser um boleto do Banco Safra, devemos selecionar em 'Critério de busca' o seguinte: 'Referencia NSU' <br> <img src='caminho/para/imagem_safra.jpg' alt='Imagem Safra'>";
+                    var resultado = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
 
                     document.getElementById("result").innerHTML = resultado;
                 } else {
