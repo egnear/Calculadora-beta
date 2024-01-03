@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Digite aqui o codigo do boleto bancario</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> <!-- Adicionando uma fonte do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Open Sans', sans-serif; /* Mudando para uma fonte mais moderna */
+            font-family: 'Open Sans', sans-serif;
             background-color: #FAFAFA;
             margin: 0;
             padding: 0;
@@ -17,36 +17,36 @@
             max-width: 400px;
             margin: 40px auto;
             padding: 20px;
-            background-color: white; /* Fundo branco para o container */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando sombra para profundidade */
-            border-radius: 8px; /* Bordas arredondadas para suavidade */
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
         h1 {
             text-align: center;
-            color: #333; /* Cor mais suave para o texto */
+            color: #333;
             margin-bottom: 20px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            color: #555; /* Cor mais suave para o label */
-            font-weight: 600; /* Tornando o label mais destacado */
+            color: #555;
+            font-weight: 600;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 16px;
             border-radius: 4px;
-            border: 1px solid #ddd; /* Bordas mais suaves */
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna sutil */
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         button {
             width: 100%;
-            background-color: #0056b3; /* Cor azul mais vibrante */
+            background-color: #0056b3;
             color: white;
             padding: 12px;
             border: none;
@@ -56,19 +56,31 @@
         }
 
         button:hover {
-            background-color: #7cc9fc; /* Cor mais escura no hover */
+            background-color: #7cc9fc;
         }
 
         #result {
             padding: 8px;
             text-align: center;
             margin-top: 10px;
-            color: #333; /* Cor de texto mais suave */
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #e7e7e7;
+        }
+
+        a.result-link {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a.result-link:hover {
+            text-decoration: underline;
         }
 
         footer {
             text-align: center;
-            background-color: #E0E0E0; /* Cor de fundo do rodapé */
+            background-color: #E0E0E0;
             padding: 10px;
             font-size: 12px;
             color: #333;
@@ -93,50 +105,30 @@
         Sugestões ou feedbacks: Heitor De Souza Igino Beserra, Flavio Raimundo Junior ou Lucas Giovanni Catardo.
     </footer>
     <script>
-
         function identificarSepararReferenceID() {
             var codigoBoleto = document.getElementById("codigo_boleto").value;
-
-            // Remova espaços em branco
             codigoBoleto = codigoBoleto.replace(/\s/g, "");
-
-            // Remova caracteres que não são números
             codigoBoleto = codigoBoleto.replace(/\D/g, "");
 
             var quantidadeDigitos = codigoBoleto.length;
+            var urlBase = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=";
+            var referenceID;
 
             if (quantidadeDigitos >= 47 && quantidadeDigitos <= 48) {
                 if (codigoBoleto.startsWith("104")) {
-                    // Boleto da Caixa
-                    var posicao18e19 = codigoBoleto.slice(17, 19);
-                    var posicao22ate30 = codigoBoleto.slice(21, 30);
-
-                    var referenceID = posicao18e19 + "" + posicao22ate30;
-                    var resultado = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
-                    document.getElementById("result").innerHTML = resultado;
+                    referenceID = codigoBoleto.slice(17, 19) + codigoBoleto.slice(21, 30);
                 } else if (codigoBoleto.startsWith("237")) {
-                    // Boleto do Bradesco
-                    var posicao12ate20 = codigoBoleto.slice(11, 20);
-                    var posicao22e23 = codigoBoleto.slice(21, 23);
-
-                    var referenceID = posicao12ate20 + posicao22e23;
-                    var resultado =  "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
-                    document.getElementById("result").innerHTML = resultado;
+                    referenceID = codigoBoleto.slice(11, 20) + codigoBoleto.slice(21, 23);
                 } else if (codigoBoleto.startsWith("422")) {
-                    // Boleto da Safra
-                    var posicao23ate31 = codigoBoleto.slice(21, 30);
-
-                    var referenceID = posicao23ate31;
-                    var resultado = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=" + referenceID;
-
-                    document.getElementById("result").innerHTML = resultado;
+                    referenceID = codigoBoleto.slice(21, 30);
                 } else {
                     document.getElementById("result").innerHTML = "Banco não identificado.";
+                    return;
                 }
-            } else if (quantidadeDigitos > 48) {
-                document.getElementById("result").innerHTML = "Há dígitos a mais! Revise o número do boleto.";
-            } else if (quantidadeDigitos < 47) {
-                document.getElementById("result").innerHTML = "Há menos dígitos! Revise o número do boleto.";
+                var link = urlBase + referenceID;
+                document.getElementById("result").innerHTML = '<a href="' + link + '" class="result-link" target="_blank">' +"Clique aqui para ser levado ao one source NSU:   " + referenceID + '</a>';
+            } else {
+                document.getElementById("result").innerHTML = "Código do boleto inválido.";
             }
         }
     </script>
