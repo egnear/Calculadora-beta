@@ -92,7 +92,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Identificador de boleto </h1>
+        <h1>Obtenha aqui o reference ID</h1>
         <label for="codigo_boleto">Os valores numéricos devem ser inseridos abaixo</label>
         <input type="text" id="codigo_boleto" placeholder="Digite o código do boleto">
         <button onclick="identificarSepararReferenceID()">Pesquisar</button>
@@ -112,21 +112,24 @@
 
             var quantidadeDigitos = codigoBoleto.length;
             var urlBase = "https://one-source.adminml.com/search?tab_id=1&tipe_by_id=nsu_reference&search_id=";
-            var referenceID;
+            var referenceID, banco;
 
             if (quantidadeDigitos >= 47 && quantidadeDigitos <= 48) {
                 if (codigoBoleto.startsWith("104")) {
-                    referenceID = "Caixa: " + codigoBoleto.slice(17, 19) + codigoBoleto.slice(21, 30);
+                    referenceID = codigoBoleto.slice(17, 19) + codigoBoleto.slice(21, 30);
+                    banco = "Caixa";
                 } else if (codigoBoleto.startsWith("237")) {
-                    referenceID = "Bradesco: " + codigoBoleto.slice(11, 20) + codigoBoleto.slice(21, 23);
+                    referenceID = codigoBoleto.slice(11, 20) + codigoBoleto.slice(21, 23);
+                    banco = "Bradesco";
                 } else if (codigoBoleto.startsWith("422")) {
-                    referenceID = "Safra: " + codigoBoleto.slice(21, 30);
+                    referenceID = codigoBoleto.slice(21, 30);
+                    banco = "Safra";
                 } else {
                     document.getElementById("result").innerHTML = "Banco não identificado.";
                     return;
                 }
                 var link = urlBase + referenceID;
-                document.getElementById("result").innerHTML = '<a href="' + link + '" class="result-link" target="_blank">Clique aqui para ser levado ao one source NSU: ' + referenceID + '</a>';
+                document.getElementById("result").innerHTML = '<a href="' + link + '" class="result-link" target="_blank">Clique aqui para ser levado ao one source NSU: ' + banco + ' ' + referenceID + '</a>';
             } else {
                 document.getElementById("result").innerHTML = "Código do boleto inválido.";
             }
